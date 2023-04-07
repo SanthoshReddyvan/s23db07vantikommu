@@ -1,0 +1,18 @@
+extends layout
+
+block content
+  h1= title
+  - let results = [{Rose_color:"Red",Rose_size:"7inch",Rose_cost:"$100"},{Rose_color:"Black",Rose_size:"12inch",Rose_cost:"$75"},{Rose_color:"white",Rose_size:"09inch",Rose_cost:"$15"}]
+  div(class="container-fluid")
+    div(class="row")
+      each item,index in results
+        div(class="col-sm-2",onClick=`buy(${index})`)
+          p Color is #{item.Rose_color}
+          p Size is #{item.Rose_size}
+          p Cost is #{item.Rose_cost}
+  //- Bonus Logic
+  script.
+    function buy(itr) {
+      itr = itr+1;
+      alert(`You Purchased Item ${itr}`);
+    }
