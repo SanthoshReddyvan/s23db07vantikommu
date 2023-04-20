@@ -1,0 +1,49 @@
+extends layout
+block content
+ h1= title
+ if (toShow == null)
+  h2 No instance to delete
+ else
+  - let roseid = toShow._id
+  - let Rose_color = toShow.Rose_color
+  - let Rose_length = toShow.Rose_size
+  - let Rose_cost = toShow.Rose_cost
+  - let actionid = "/resource/rose/" + roseid
+  script let actionid = "#{actionid}"
+  div
+   div.row
+    div(class='roseAttr mr-3') rose ID is:
+    div #{roseid}
+   div.row
+    div(class='roseAttr mr-3') rose Type is:
+    div #{Rose_color}
+   div.row
+    div(class='roseAttr mr-3') rose Size is:
+    div #{Rose_size}
+   div.row
+    div(class='roseAttr mr-3') rose Cost is:
+    div #{Rose_cost}
+  button(class="btn btn-danger m-2" onclick="deleteOnid()") Delete
+  button(class="btn btn-secondary m-2" onclick="cancel()") Cancel
+ script.
+  function cancel() {
+  // Go back to the home page for the rose collection
+  window.location.href='/rose'
+  }
+ script.
+  function deleteOnid() {
+   console.log("starting delete")
+   // delete first
+   fetch(actionid, {
+    method: 'DELETE' // Don't need a body for the delete
+   }).then((resp) => {
+    return resp.json(); // or resp.text() or whatever the server sends
+   }).then((body) => {
+    alert("Delete succeded")
+   window.location.href='/rose'
+   // TODO handle body
+   }).catch((error) => {
+   // TODO handle error
+    alert("Delete failed " + error )
+   });
+  }

@@ -1,0 +1,42 @@
+extends layout
+block content
+ h1= title
+ if (toShow == null)
+  h2 No instance to delete
+ else
+  - let roseid = toShow._id
+  - let Rose_color = toShow.Rose_color
+  - let Rose_length = toShow.Rose_size
+  - let Rose_cost = toShow.Rose_cost
+  div.row(class='mb-2')
+   div.mr-1 ID is
+   div #{roseid}
+  - let actionid = "/resource/rose/" + roseid
+  form(id='roseForm', action= actionid, method="PUT")
+   div.form-group
+     label.roseAttr(for='Rose_color') rose color
+     input#Rose_color(type='text', name='Rose_color', value= Rose_color )
+   div.form-group
+     label.roseAttr(for='Rose_size') rose size
+     input#Rose_length(type='number', name='Rose_size', value= Rose_size )
+   div.form-group
+     label.roseAttr(for='Rose_cost') rose cost
+     input#Rose_cost(type='number', name='Rose_cost', value= Rose_cost )
+   input(type="submit")
+  script.
+   document.forms['roseForm'].addEventListener('submit', (event) => {
+    event.preventDefault();
+    // TODO do something here to show user that form is being submitted
+    fetch(event.target.action, {
+     method: 'PUT',
+     body: new URLSearchParams(new FormData(event.target)) // event.target is the form
+    }).then((resp) => {
+     return resp.json(); // or resp.text() or whatever the server sends
+    }).then((body) => {
+     alert("Update succeded")
+     // TODO handle body
+    }).catch((error) => {
+     // TODO handle error
+     alert("Update failed " + error )
+    });
+   });

@@ -1,0 +1,23 @@
+extends layout
+block content
+ h1= title
+ if (toShow == null)
+  h2 No instance to delete
+ else
+  - let roseid = toShow._id
+  - let Rose_color = toShow.Rose_color
+  - let Rose_size = toShow.Rose_size
+  - let Rose_cost = toShow.Rose_cost
+  div
+   div.row
+    div(class='roseAttr mr-3') rose id is:
+    div #{roseid}
+   div.row
+    div(class='roseAttr mr-3') Rose color is:
+    div #{Rose_color}
+   div.row
+    div(class='roseAttr mr-3') Rose size is:
+    div #{Rose_size}
+   div.row
+    div(class='roseAttr mr-3') rose cost is:
+    div #{Rose_cost}
