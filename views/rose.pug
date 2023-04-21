@@ -2,14 +2,23 @@ extends layout
 
 block content
   h1= title
-  - let results = [{Rose_color:"Red",Rose_size:"7inch",Rose_cost:"$100"},{Rose_color:"Black",Rose_size:"12inch",Rose_cost:"$75"},{Rose_color:"white",Rose_size:"09inch",Rose_cost:"$15"}]
+  //- let results = [{Rose_color:"Red",Rose_size:"7inch",Rose_cost:"$100"},{Rose_color:"Black",Rose_size:"12inch",Rose_cost:"$75"},{Rose_color:"white",Rose_size:"09inch",Rose_cost:"$15"}]
+  -let items = results
   div(class="container-fluid")
     div(class="row")
-      each item,index in results
+      each item in items
+       - let destination = `dispatch(\"/rose/update?id=${item._id}\")`
         div(class="col-sm-2",onClick=`buy(${index})`)
           p Color is #{item.Rose_color}
           p Size is #{item.Rose_size}
           p Cost is #{item.Rose_cost}
+
+        button.btn( class="btn-primary ml-1", onclick= destination) Update
+  script.
+   function dispatch(path){
+    window.location.href=path
+   }
+
   //- Bonus Logic
   script.
     function buy(itr) {
