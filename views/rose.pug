@@ -4,6 +4,7 @@ block content
   h1= title
   //- let results = [{Rose_color:"Red",Rose_size:"7inch",Rose_cost:"$100"},{Rose_color:"Black",Rose_size:"12inch",Rose_cost:"$75"},{Rose_color:"white",Rose_size:"09inch",Rose_cost:"$15"}]
   -let items = results
+  button.btn( class="btn-success ml-1", onclick= `dispatch(\"/rose/create?\")`) Create
   div(class="container-fluid")
     div(class="row")
       each item in items
@@ -13,7 +14,9 @@ block content
           p Size is #{item.Rose_size}
           p Cost is #{item.Rose_cost}
 
-        button.btn( class="btn-primary ml-1", onclick= destination) Update
+        button.btn( class="btn-warning ml-1", onclick= destination) Update
+        button.btn( class="btn-info ml-1", onclick= `dispatch(\"/rose/detail?id=${item._id}\")`) Detail
+        button.btn( class="btn-danger ml-1", onclick= `dispatch(\"/rose/delete?id=${item._id}\")`) Delete
   script.
    function dispatch(path){
     window.location.href=path

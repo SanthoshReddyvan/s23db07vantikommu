@@ -21,7 +21,7 @@ block content
      input#Rose_length(type='number', name='Rose_size', value= Rose_size )
    div.form-group
      label.roseAttr(for='Rose_cost') rose cost
-     input#Rose_cost(type='number', name='Rose_cost', value= Rose_cost )
+     input#Rose_cost(type='number', name='Rose_cost', value= Rose_cost,min=03, max=3333 )
    input(type="submit")
   script.
    document.forms['roseForm'].addEventListener('submit', (event) => {
